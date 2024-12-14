@@ -17,7 +17,7 @@ android {
         versionCode = 1
         versionName = "1.0"
         buildConfigField("String", "BASE_URL", "\"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\"")
-        buildConfigField("String", "API_KEY", "\"https://api.github.com/\"")
+        buildConfigField("String", "API_KEY", "\"${properties.getProperty("API_KEY")}\"")
 
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -61,7 +61,6 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
-    implementation(libs.androidx.activity)
     ksp("androidx.room:room-compiler:2.6.1")
     implementation ("androidx.viewpager2:viewpager2:1.0.0")
     testImplementation("junit:junit:4.13.2")
