@@ -21,10 +21,10 @@ class StoryAdapter(
                     .load(story.photoUrl)
                     .into(ivStory)
                 
-                // Tambahkan onClick di root view
                 root.setOnClickListener {
                     onItemClick(story)
                 }
+                ivStory.transitionName = "story_image_${story.id}"
             }
         }
     }

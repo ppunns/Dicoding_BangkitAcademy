@@ -10,6 +10,8 @@ import com.dicoding.picodiploma.loginwithanimation.data.Result
 import com.dicoding.picodiploma.loginwithanimation.data.response.StoryResponse
 import com.dicoding.picodiploma.loginwithanimation.data.retrofit.ApiConfig
 import com.dicoding.picodiploma.loginwithanimation.data.retrofit.ApiService
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 
 class UserRepository private constructor(
     private val userPreference: UserPreference,
@@ -50,6 +52,16 @@ class UserRepository private constructor(
 
     suspend fun getStories(token: String): StoryResponse {
         return ApiConfig.getApiService(token).getStories()
+    }
+
+    fun uploadStory(file: MultipartBody.Part, description: RequestBody) = liveData {
+        emit(Result.Loading)
+        try {
+            val response = apiService.uploadImage(file, description)
+            emit(Result.Success(response))
+        } catch (e: Exception) {
+            emit(Result.Error(e.message.toString()))
+        }
     }
 
     companion object {
